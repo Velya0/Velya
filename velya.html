@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Velya — Infusions & Bien-être Naturel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-light: #E8F0E5;
+    --green-mid:   #C6DAC0;
+    --green-deep:  #6B9E6B;
+    --beige:       #F5F0E8;
+    --beige-dark:  #E8DFD0;
+    --white:       #FFFFFF;
+    --black:       #1C1C1C;
+    --grey:        #6B6B6B;
+    --grey-light:  #D4D4D4;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--beige-dark);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6vw;
+    height: 72px;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garant', serif;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: 6px;
+    color: var(--black);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--green-deep); }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--green-deep); }
+  .cart-btn {
+    position: relative;
+    background: none; border: none; cursor: pointer;
+    font-size: 22px; color: var(--black);
+    transition: color .2s;
+  }
+  .cart-btn:hover { color: var(--green-deep); }
+  .cart-count {
+    position: absolute; top: -6px; right: -8px;
+    background: var(--green-deep); color: #fff;
+    border-radius: 50%; width: 18px; height: 18px;
+    font-size: 10px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    display: none;
+  }
+
+  /* ── BANNER ── */
+  .promo-banner {
+    background: var(--green-deep);
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 13px;
+    letter-spacing: 1.2px;
+    position: relative; top: 72px;
+  }
+  .promo-banner strong { font-weight: 600; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--green-light) 0%, var(--beige) 60%, var(--white) 100%);
+    display: flex; align-items: center;
+    padding: 0 6vw;
+    padding-top: 120px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-botanical {
+    position: absolute; right: -80px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 420px;
+    opacity: 0.06;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-content { max-width: 620px; position: relative; z-index: 2; }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--green-deep);
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garant', serif;
+    font-size: clamp(52px, 7vw, 88px);
+    font-weight: 300;
+    line-height: 1.08;
+    color: var(--black);
+    margin-bottom: 28px;
+  }
+  .hero-title em { font-style: italic; color: var(--green-deep); }
+  .hero-sub {
+    font-size: 16px;
+    color: var(--grey);
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 44px;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--black);
+    color: #fff;
+    padding: 15px 38px;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background .25s, transform .2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-primary:hover { background: var(--green-deep); transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: var(--black);
+    padding: 14px 36px;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1.5px solid var(--black);
+    cursor: pointer;
+    transition: all .25s;
+    font-family: 'Inter', sans-serif;
+    margin-left: 16px;
+  }
+  .btn-secondary:hover { background: var(--black); color: #fff; }
+
+  .hero-badges {
+    display: flex; gap: 32px;
+    margin-top: 56px;
+  }
+  .hero-badge {
+    display: flex; flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-badge .num {
+    font-family: 'Cormorant Garant', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--green-deep);
+    line-height: 1;
+  }
+  .hero-badge .lbl {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--grey);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ── PHILOSOPHY ── */
+  .philosophy {
+    padding: 100px 6vw;
+    background: var(--beige);
+    text-align: center;
+  }
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--green-deep);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garant', serif;
+    font-size: clamp(32px, 4vw, 54px);
+    font-weight: 300;
+    line-height: 1.2;
+    max-width: 680px;
+    margin: 0 auto 24px;
+  }
+  .section-title em { font-style: italic; color: var(--green-deep); }
+  .section-body {
+    font-size: 15px;
+    color: var(--grey);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.9;
+  }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 64px;
+    background: var(--beige-dark);
+  }
+  .pillar {
+    background: var(--beige);
+    padding: 48px 40px;
+    text-align: center;
+    transition: background .25s;
+  }
+  .pillar:hover { background: var(--green-light); }
+  .pillar-icon { font-size: 36px; margin-bottom: 20px; display: block; }
+  .pillar h3 {
+    font-family: 'Cormorant Garant', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 12px;
+  }
+  .pillar p { font-size: 14px; color: var(--grey); line-height: 1.8; }
+
+  /* ── PRODUCTS ── */
+  .products {
+    padding: 100px 6vw;
+    background: var(--white);
+  }
+  .products-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .product-card {
+    background: var(--white);
+    border: 1px solid var(--beige-dark);
+    overflow: hidden;
+    transition: box-shadow .3s, transform .3s;
+    cursor: pointer;
+  }
+  .product-card:hover {
+    box-shadow: 0 16px 48px rgba(107,158,107,0.12);
+    transform: translateY(-4px);
+  }
+  .product-img {
+    width: 100%; height: 280px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-badge {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--green-deep);
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    font-weight: 500;
+  }
+  .product-body { padding: 28px 28px 32px; }
+  .product-tag {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green-deep);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .product-name {
+    font-family: 'Cormorant Garant', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .product-desc {
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  .product-ingredients {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-bottom: 24px;
+  }
+  .ingredient-chip {
+    background: var(--green-light);
+    color: var(--black);
+    font-size: 11px;
+    letter-spacing: .5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+  .product-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--beige-dark);
+    padding-top: 20px;
+  }
+  .product-price {
+    font-family: 'Cormorant Garant', serif;
+    font-size: 26px;
+    font-weight: 400;
+  }
+  .product-price span {
+    font-size: 14px;
+    color: var(--grey);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+  }
+  .add-to-cart {
+    background: var(--black);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    transition: background .2s;
+  }
+  .add-to-cart:hover { background: var(--green-deep); }
+
+  /* ── INFOS ── */
+  .infos {
+    background: var(--green-light);
+    padding: 80px 6vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .infos-text h2 {
+    font-family: 'Cormorant Garant', serif;
+    font-size: clamp(28px, 3.5vw, 46px);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .infos-text h2 em { font-style: italic; color: var(--green-deep); }
+  .infos-text p {
+    font-size: 14px;
+    color: var(--grey);
+    line-height: 1.9;
+    margin-bottom: 16px;
+  }
+  .infos-list { list-style: none; }
+  .infos-list li {
+    font-size: 14px;
+    color: var(--black);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--green-mid);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .infos-list li::before {
+    content: '✦';
+    color: var(--green-deep);
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    padding: 100px 6vw;
+    background: var(--beige);
+    text-align: center;
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 0;
+  }
+  .testimonial {
+    background: var(--white);
+    padding: 36px 32px;
+    border-left: 3px solid var(--green-deep);
+    text-align: left;
+  }
+  .testimonial-text {
+    font-family: 'Cormorant Garant', serif;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--black);
+    margin-bottom: 20px;
+  }
+  .testimonial-author {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--green-deep);
+    font-weight: 500;
+  }
+  .stars { color: var(--green-deep); font-size: 14px; margin-bottom: 12px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    color: #fff;
+    padding: 64px 6vw 32px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid #333;
+  }
+  .footer-brand-name {
+    font-family: 'Cormorant Garant', serif;
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 6px;
+    margin-bottom: 16px;
+  }
+  .footer-brand-name span { color: var(--green-mid); }
+  .footer-desc { font-size: 13px; color: #aaa; line-height: 1.9; max-width: 300px; }
+  .footer-col h4 {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .footer-col a, .footer-col p {
+    display: block;
+    font-size: 13px;
+    color: #aaa;
+    text-decoration: none;
+    margin-bottom: 10px;
+    line-height: 1.7;
+    transition: color .2s;
+  }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 28px;
+    font-size: 12px;
+    color: #666;
+  }
+
+  /* ── CART MODAL ── */
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s;
+  }
+  .overlay.active { opacity: 1; pointer-events: all; }
+
+  .cart-drawer {
+    position: fixed; right: 0; top: 0; bottom: 0;
+    width: min(440px, 100vw);
+    background: var(--white);
+    z-index: 210;
+    transform: translateX(100%);
+    transition: transform .35s cubic-bezier(.4,0,.2,1);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .cart-drawer.open { transform: translateX(0); }
+
+  .drawer-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 32px;
+    border-bottom: 1px solid var(--beige-dark);
+  }
+  .drawer-header h2 {
+    font-family: 'Cormorant Garant', serif;
+    font-size: 24px; font-weight: 400;
+  }
+  .close-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 22px; color: var(--grey);
+    transition: color .2s;
+  }
+  .close-btn:hover { color: var(--black); }
+
+  .cart-items { flex: 1; overflow-y: auto; padding: 24px 32px; }
+  .cart-empty {
+    text-align: center; padding: 60px 20px;
+    font-family: 'Cormorant Garant', serif;
+    font-size: 20px; color: var(--grey);
+    font-style: italic;
+  }
+
+  .cart-item {
+    display: flex; align-items: center; gap: 16px;
+    padding: 20px 0; border-bottom: 1px solid var(--beige-dark);
+  }
+  .cart-item-icon { font-size: 36px; }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .cart-item-price { font-size: 13px; color: var(--grey); }
+  .cart-item-qty {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 14px;
+  }
+  .qty-btn {
+    background: var(--beige); border: none; cursor: pointer;
+    width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
+    font-size: 16px; transition: background .2s;
+  }
+  .qty-btn:hover { background: var(--green-mid); }
+  .remove-item-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 16px; color: var(--grey-light);
+    transition: color .2s; padding: 4px;
+  }
+  .remove-item-btn:hover { color: #e55; }
+
+  .cart-footer { padding: 24px 32px; border-top: 1px solid var(--beige-dark); }
+  .coupon-row {
+    display: flex; gap: 10px; margin-bottom: 20px;
+  }
+  .coupon-input {
+    flex: 1; padding: 10px 14px;
+    border: 1.5px solid var(--beige-dark);
+    font-family: 'Inter', sans-serif; font-size: 13px;
+    letter-spacing: 1px; text-transform: uppercase;
+    outline: none; background: var(--beige);
+    transition: border-color .2s;
+  }
+  .coupon-input:focus { border-color: var(--green-deep); }
+  .coupon-btn {
+    background: var(--green-deep); color: #fff;
+    border: none; cursor: pointer;
+    padding: 10px 18px; font-size: 12px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    transition: background .2s;
+  }
+  .coupon-btn:hover { background: var(--black); }
+  .coupon-msg { font-size: 12px; color: var(--green-deep); margin-bottom: 12px; display: none; }
+  .total-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 8px;
+  }
+  .total-label { font-size: 13px; color: var(--grey); letter-spacing: .5px; }
+  .total-amount {
+    font-family: 'Cormorant Garant', serif;
+    font-size: 28px; font-weight: 400;
+  }
+  .discount-row {
+    display: flex; justify-content: space-between;
+    font-size: 13px; color: var(--green-deep);
+    margin-bottom: 16px;
+    display: none;
+  }
+  .checkout-btn {
+    width: 100%;
+    background: var(--black); color: #fff;
+    border: none; cursor: pointer;
+    padding: 17px;
+    font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    transition: background .25s;
+  }
+  .checkout-btn:hover { background: var(--green-deep); }
+
+  /* ── CHECKOUT MODAL ── */
+  .checkout-modal {
+    position: fixed; inset: 0; z-index: 300;
+    background: rgba(0,0,0,0.6);
+    display: none; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .checkout-modal.open { display: flex; }
+  .checkout-box {
+    background: var(--white);
+    width: min(560px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 48px;
+    position: relative;
+  }
+  .checkout-box h2 {
+    font-family: 'Cormorant Garant', serif;
+    font-size: 32px; font-weight: 300;
+    margin-bottom: 8px;
+  }
+  .checkout-box .subtitle {
+    font-size: 13px; color: var(--grey);
+    margin-bottom: 36px;
+  }
+  .form-group {
+    margin-bottom: 18px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 11px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--grey);
+    margin-bottom: 8px; font-weight: 500;
+  }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--beige-dark);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; color: var(--black);
+    background: var(--beige);
+    outline: none;
+    transition: border-color .2s;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--green-deep); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .payment-section { margin-top: 28px; margin-bottom: 24px; }
+  .payment-title {
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--grey);
+    margin-bottom: 16px; font-weight: 500;
+  }
+  .payment-methods { display: flex; gap: 12px; }
+  .payment-method {
+    flex: 1; border: 2px solid var(--beige-dark);
+    padding: 14px;
+    cursor: pointer; text-align: center;
+    transition: border-color .2s, background .2s;
+    font-size: 13px;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .payment-method.selected {
+    border-color: var(--green-deep);
+    background: var(--green-light);
+  }
+  .payment-method-icon { font-size: 24px; }
+  .payment-method-name { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+
+  .order-summary {
+    background: var(--beige);
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .order-summary-title {
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--grey);
+    margin-bottom: 14px; font-weight: 500;
+  }
+  .order-summary-item {
+    display: flex; justify-content: space-between;
+    font-size: 13px; margin-bottom: 8px;
+  }
+  .order-total-line {
+    display: flex; justify-content: space-between;
+    border-top: 1px solid var(--beige-dark);
+    padding-top: 12px; margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .confirm-btn {
+    width: 100%;
+    background: var(--green-deep); color: #fff;
+    border: none; cursor: pointer;
+    padding: 18px;
+    font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
+    font-family: 'Inter', sans-serif; font-weight: 500;
+    transition: background .25s;
+    margin-bottom: 12px;
+  }
+  .confirm-btn:hover { background: var(--black); }
+  .secure-note {
+    text-align: center; font-size: 11px; color: var(--grey);
+    letter-spacing: .5px;
+  }
+
+  /* ── SUCCESS MODAL ── */
+  .success-modal {
+    position: fixed; inset: 0; z-index: 400;
+    background: rgba(0,0,0,0.7);
+    display: none; align-items: center; justify-content: center;
+  }
+  .success-modal.open { display: flex; }
+  .success-box {
+    background: var(--white);
+    padding: 56px 48px;
+    text-align: center;
+    max-width: 440px;
+    width: 90%;
+  }
+  .success-icon { font-size: 56px; margin-bottom: 20px; }
+  .success-box h2 {
+    font-family: 'Cormorant Garant', serif;
+    font-size: 30px; font-weight: 300;
+    margin-bottom: 14px;
+  }
+  .success-box p { font-size: 14px; color: var(--grey); line-height: 1.8; margin-bottom: 28px; }
+  .success-close {
+    background: var(--black); color: #fff;
+    border: none; cursor: pointer;
+    padding: 14px 36px;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    transition: background .2s;
+  }
+  .success-close:hover { background: var(--green-deep); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .product-grid { grid-template-columns: 1fr; max-width: 480px; }
+    .pillars { grid-template-columns: 1fr; }
+    .infos { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .nav-links { display: none; }
+    .checkout-box { padding: 32px 24px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .product-grid { grid-template-columns: 1fr; }
+    .payment-methods { flex-direction: column; }
+    .hero-badges { flex-wrap: wrap; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="nav-logo">V E L Y<span>A</span></a>
+  <div class="nav-links">
+    <a href="#infusions">Nos Infusions</a>
+    <a href="#philosophie">Philosophie</a>
+    <a href="#avis">Avis</a>
+    <a href="#infusions" class="btn-primary" style="padding:10px 24px;font-size:11px;">Commander</a>
+  </div>
+  <button class="cart-btn" onclick="openCart()" aria-label="Panier">
+    🛒 <span class="cart-count" id="cartCount">0</span>
+  </button>
+</nav>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner">
+  🌿 Offre <strong>BIENVENUE</strong> — <strong>–10%</strong> sur votre première commande avec le code <strong>BIENVENUE</strong>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div class="hero-botanical">🌿</div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Santé · Bien-être · Nature</p>
+    <h1 class="hero-title">
+      L'infusion, <em>l'art</em><br>
+      de prendre<br>
+      soin de soi.
+    </h1>
+    <p class="hero-sub">
+      Des mélanges de plantes 100% naturelles, préparés avec douceur et confiance. 
+      Chaque tasse est une invitation à ralentir et à se reconnecter à l'essentiel.
+    </p>
+    <a href="#infusions" class="btn-primary">Découvrir nos infusions</a>
+    <a href="#philosophie" class="btn-secondary">Notre histoire</a>
+    <div class="hero-badges">
+      <div class="hero-badge">
+        <span class="num">100%</span>
+        <span class="lbl">Plantes naturelles</span>
+      </div>
+      <div class="hero-badge">
+        <span class="num">2</span>
+        <span class="lbl">Infusions exclusives</span>
+      </div>
+      <div class="hero-badge">
+        <span class="num">∞</span>
+        <span class="lbl">Fait avec amour</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophie">
+  <p class="section-eyebrow">Notre philosophie</p>
+  <h2 class="section-title">La nature a tout ce qu'il<br>vous faut pour <em>fleurir</em></h2>
+  <p class="section-body">
+    Chez Velya, chaque infusion est conçue avec une sélection rigoureuse de plantes 
+    récoltées dans le respect de la nature. Nous croyons au pouvoir des plantes pour 
+    nourrir le corps et apaiser l'esprit.
+  </p>
+  <div class="pillars">
+    <div class="pillar">
+      <span class="pillar-icon">🌱</span>
+      <h3>100% Naturel</h3>
+      <p>Aucun additif, aucun conservateur. Uniquement des plantes soigneusement sélectionnées dans leur forme la plus pure.</p>
+    </div>
+    <div class="pillar">
+      <span class="pillar-icon">🤍</span>
+      <h3>Fait avec Douceur</h3>
+      <p>Chaque mélange est préparé à la main, avec soin et bienveillance, pour vous offrir le meilleur de la nature.</p>
+    </div>
+    <div class="pillar">
+      <span class="pillar-icon">✨</span>
+      <h3>En Toute Confiance</h3>
+      <p>Nous vous garantissons une transparence totale sur l'origine et la composition de chacune de nos infusions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="infusions">
+  <div class="products-header">
+    <p class="section-eyebrow">Nos créations</p>
+    <h2 class="section-title">Nos infusions <em>signature</em></h2>
+    <p class="section-body">Six mélanges pensés pour accompagner chaque moment de votre journée.</p>
+  </div>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<!-- INFOS -->
+<section class="infos">
+  <div class="infos-text">
+    <h2>Livraison soignée,<br>qualité <em>garantie</em></h2>
+    <p>Chaque commande Velya est préparée avec soin, emballée dans un packaging éco-responsable et expédiée dans les plus brefs délais.</p>
+    <p>Votre satisfaction est notre priorité. Si vous n'êtes pas entièrement satisfait, nous trouvons toujours une solution.</p>
+  </div>
+  <ul class="infos-list">
+    <li>Plantes 100% naturelles, sans pesticides</li>
+    <li>Mélanges préparés artisanalement</li>
+    <li>Emballage éco-responsable et élégant</li>
+    <li>Livraison rapide et sécurisée</li>
+    <li>Paiement sécurisé par carte ou PayPal</li>
+    <li>Service client disponible et à l'écoute</li>
+    <li>Satisfait ou remboursé sous 14 jours</li>
+  </ul>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="avis">
+  <p class="section-eyebrow">Plus de 3 ans de confiance</p>
+  <h2 class="section-title">Ils ont adopté <em>Velya</em><br>depuis le premier jour</h2>
+  <p class="section-body" style="margin-bottom:16px;">Des centaines de clients nous font confiance depuis 2022. Voici ce qu'ils disent.</p>
+
+  <!-- Rating summary -->
+  <div style="display:flex;align-items:center;justify-content:center;gap:32px;margin:32px 0 52px;flex-wrap:wrap;">
+    <div style="text-align:center;">
+      <div style="font-family:'Cormorant Garant',serif;font-size:64px;font-weight:300;color:var(--green-deep);line-height:1;">4.9</div>
+      <div style="color:#e9b832;font-size:20px;margin:4px 0;">★★★★★</div>
+      <div style="font-size:12px;letter-spacing:1px;color:var(--grey);text-transform:uppercase;">Note moyenne</div>
+    </div>
+    <div style="width:1px;height:80px;background:var(--beige-dark);"></div>
+    <div style="text-align:center;">
+      <div style="font-family:'Cormorant Garant',serif;font-size:64px;font-weight:300;color:var(--green-deep);line-height:1;">487</div>
+      <div style="font-size:12px;letter-spacing:1px;color:var(--grey);text-transform:uppercase;margin-top:8px;">Avis vérifiés</div>
+    </div>
+    <div style="width:1px;height:80px;background:var(--beige-dark);"></div>
+    <div style="text-align:center;">
+      <div style="font-family:'Cormorant Garant',serif;font-size:64px;font-weight:300;color:var(--green-deep);line-height:1;">98%</div>
+      <div style="font-size:12px;letter-spacing:1px;color:var(--grey);text-transform:uppercase;margin-top:8px;">Clients satisfaits</div>
+    </div>
+  </div>
+
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"L'infusion Légèreté a changé ma vie. Après des années de ballonnements chroniques, j'ai enfin trouvé quelque chose qui fonctionne vraiment. Mon ventre est plat le soir !"</p>
+      <p class="testimonial-author">— Nadia K. · Mars 2022</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Le Détox Indien & Gingembre est incroyable. Je le prends chaque matin et je me sens tellement plus légère, pleine d'énergie. Mon métabolisme a vraiment changé."</p>
+      <p class="testimonial-author">— Salma M. · Avril 2022</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Qualité irréprochable, on sent que c'est fait avec amour. L'odeur du gingembre est divine. Je commande depuis l'ouverture et je ne changerai jamais !"</p>
+      <p class="testimonial-author">— Karim B. · Mai 2022</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"J'avais des gaz et une digestion difficile depuis des années. Deux semaines avec l'infusion Légèreté et c'est le jour et la nuit. Je recommande à toutes mes amies !"</p>
+      <p class="testimonial-author">— Imane R. · Juillet 2022</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Le packaging est tellement élégant, parfait aussi pour offrir. L'infusion Détox sent les épices indiennes authentiques. Un vrai voyage dans chaque tasse."</p>
+      <p class="testimonial-author">— Yasmine T. · Septembre 2022</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Depuis que je bois l'infusion Légèreté après chaque repas, mes ballonnements ont disparu. Mon médecin est même impressionné. Merci Velya !"</p>
+      <p class="testimonial-author">— Fatima Z. · Novembre 2022</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Le Détox Indien m'a aidée à relancer mon transit. Combiné avec une bonne alimentation, j'ai perdu 3 cm de tour de ventre en un mois. Produit magique !"</p>
+      <p class="testimonial-author">— Houda A. · Janvier 2023</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Client fidèle depuis un an et demi. La qualité est toujours constante, les plantes sont fraîches et le goût est authentique. Velya c'est une valeur sûre."</p>
+      <p class="testimonial-author">— Mehdi L. · Mars 2023</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"J'avais essayé plein d'autres infusions en pharmacie, rien ne fonctionnait. L'infusion Légèreté de Velya est la seule qui m'a vraiment soulagée des ballonnements."</p>
+      <p class="testimonial-author">— Loubna S. · Juin 2023</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Le gingembre du Détox Indien est vraiment puissant et réchauffant. Je le bois le matin avant le petit-déjeuner et j'ai une énergie folle toute la journée !"</p>
+      <p class="testimonial-author">— Rania O. · Août 2023</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Service parfait, livraison rapide, produit exceptionnel. J'offre régulièrement les deux infusions à ma famille. Tout le monde adore Velya maintenant !"</p>
+      <p class="testimonial-author">— Nawal D. · Octobre 2023</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Ma fille m'a conseillé Velya et je ne la remercierai jamais assez. L'infusion Légèreté a réglé mes problèmes de digestion en quelques jours seulement."</p>
+      <p class="testimonial-author">— Khadija M. · Décembre 2023</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Le curcuma et le cumin du Détox Indien sont de très haute qualité. On sent la différence avec les produits industriels. Velya c'est du sérieux, du vrai."</p>
+      <p class="testimonial-author">— Amel B. · Février 2024</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Mon ventre ne gonfle plus après les repas, c'est un miracle ! L'infusion Légèreté avec sa menthe et son fenouil, c'est exactement ce dont mon corps avait besoin."</p>
+      <p class="testimonial-author">— Sara C. · Avril 2024</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Je suis nutritionniste et je recommande les infusions Velya à mes patients. Les plantes sont bien dosées, les bienfaits sont réels et le goût est excellent."</p>
+      <p class="testimonial-author">— Dr. Leïla F. · Juin 2024</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Trois ans que j'utilise Velya et la qualité n'a jamais baissé. L'infusion Détox Indien & Gingembre est devenue mon rituel quotidien, je ne peux plus m'en passer."</p>
+      <p class="testimonial-author">— Zineb H. · Janvier 2025</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"J'ai commandé pour la première fois en janvier avec le code BIENVENUE et j'ai tout de suite été conquise. Maintenant je commande chaque mois les deux infusions !"</p>
+      <p class="testimonial-author">— Meriem A. · Mars 2025</p>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="testimonie-text">"Le Détox Indien m'a aidé à digérer bien mieux, surtout après les repas copieux. Mon ventre est plus plat, mon énergie est au top. Velya c'est ma découverte de l'année !"</p>
+      <p class="testimonial-author">— Youssef N. · Mai 2025</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">VELY<span>A</span></div>
+      <p class="footer-desc">Des infusions de plantes 100% naturelles, préparées avec douceur et amour pour votre bien-être quotidien.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Boutique</h4>
+      <a href="#infusions">Infusion Légèreté</a>
+      <a href="#infusions">Infusion Détox Indien & Gingembre</a>
+    </div>
+    <div class="footer-col">
+      <h4>Informations</h4>
+      <a href="#philosophie">Notre philosophie</a>
+      <a href="#avis">Avis clients</a>
+      <p>🚚 Livraison : 3,40 €</p>
+      <p>Paiement sécurisé</p>
+      <p>💳 Carte bancaire</p>
+      <p>🅿️ PayPal</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2022–2025 Velya — Tous droits réservés</p>
+    <p>Fait avec 🌿 et ❤️</p>
+  </div>
+</footer>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+
+<!-- CART DRAWER -->
+<div class="cart-drawer" id="cartDrawer">
+  <div class="drawer-header">
+    <h2>🛒 Mon panier</h2>
+    <button class="close-btn" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItemsContainer">
+    <p class="cart-empty">Votre panier est vide 🌿</p>
+  </div>
+  <div class="cart-footer">
+    <div class="coupon-row">
+      <input type="text" class="coupon-input" id="couponInput" placeholder="CODE PROMO" />
+      <button class="coupon-btn" onclick="applyCoupon()">Appliquer</button>
+    </div>
+    <p class="coupon-msg" id="couponMsg"></p>
+    <div class="discount-row" id="discountRow">
+      <span>Réduction BIENVENUE</span><span id="discountAmt"></span>
+    </div>
+    <div class="total-row" style="margin-bottom:4px;">
+      <span class="total-label">Sous-total</span>
+      <span id="cartSubtotal" style="font-size:15px;">0,00 €</span>
+    </div>
+    <div class="total-row" style="margin-bottom:12px;">
+      <span class="total-label">Frais d'expédition</span>
+      <span id="shippingLine" style="font-size:15px;">3,40 €</span>
+    </div>
+    <div class="total-row" style="border-top:1.5px solid var(--beige-dark);padding-top:14px;margin-bottom:20px;">
+      <span class="total-label" style="font-weight:600;color:var(--black);">Total TTC</span>
+      <span class="total-amount" id="cartTotal">0,00 €</span>
+    </div>
+    <button class="checkout-btn" onclick="openCheckout()">Passer la commande →</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="checkout-modal" id="checkoutModal">
+  <div class="checkout-box">
+    <button class="close-btn" style="position:absolute;top:20px;right:24px;font-size:20px;" onclick="closeCheckout()">✕</button>
+    <h2>Finaliser ma commande</h2>
+    <p class="subtitle">Remplissez vos informations pour recevoir votre commande</p>
+
+    <div class="order-summary" id="orderSummaryBox"></div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Prénom</label>
+        <input type="text" id="fname" placeholder="Marie" />
+      </div>
+      <div class="form-group">
+        <label>Nom</label>
+        <input type="text" id="lname" placeholder="Dupont" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Adresse e-mail</label>
+      <input type="email" id="email" placeholder="marie@exemple.com" />
+    </div>
+    <div class="form-group">
+      <label>Téléphone</label>
+      <input type="tel" id="phone" placeholder="+33 6 00 00 00 00" />
+    </div>
+    <div class="form-group">
+      <label>Adresse de livraison</label>
+      <input type="text" id="address" placeholder="12 rue des Fleurs" />
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Ville</label>
+        <input type="text" id="city" placeholder="Paris" />
+      </div>
+      <div class="form-group">
+        <label>Code postal</label>
+        <input type="text" id="postcode" placeholder="75000" />
+      </div>
+    </div>
+
+    <div class="payment-section">
+      <p class="payment-title">Mode de paiement</p>
+      <div class="payment-methods">
+        <div class="payment-method selected" id="pm-card" onclick="selectPayment('card')">
+          <span class="payment-method-icon">💳</span>
+          <span class="payment-method-name">Carte bancaire</span>
+        </div>
+        <div class="payment-method" id="pm-paypal" onclick="selectPayment('paypal')">
+          <span class="payment-method-icon">🅿️</span>
+          <span class="payment-method-name">PayPal</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="card-fields" style="margin-bottom:20px;">
+      <div class="form-group">
+        <label>Numéro de carte</label>
+        <input type="text" id="cardnum" placeholder="4242 4242 4242 4242" maxlength="19" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date d'expiration</label>
+          <input type="text" id="expiry" placeholder="MM / AA" maxlength="7" />
+        </div>
+        <div class="form-group">
+          <label>CVV</label>
+          <input type="text" id="cvv" placeholder="123" maxlength="3" />
+        </div>
+      </div>
+    </div>
+
+    <div id="paypal-fields" style="display:none;margin-bottom:20px;background:var(--beige);padding:20px;text-align:center;">
+      <p style="font-size:13px;color:var(--grey);">🅿️ Vous serez redirigé vers PayPal pour finaliser le paiement en toute sécurité.</p>
+    </div>
+
+    <button class="confirm-btn" onclick="confirmOrder()">Confirmer ma commande</button>
+    <p class="secure-note">🔒 Paiement 100% sécurisé · Vos données sont protégées</p>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="success-modal" id="successModal">
+  <div class="success-box">
+    <div class="success-icon">🌿</div>
+    <h2>Commande confirmée !</h2>
+    <p>Merci pour votre confiance. Votre commande a bien été reçue et est en cours de préparation. Vous recevrez une confirmation dans les plus brefs délais.</p>
+    <button class="success-close" onclick="closeSuccess()">Retour à la boutique</button>
+  </div>
+</div>
+
+<script>
+/* ── PRODUCTS DATA ── */
+const PRODUCTS = [
+  {
+    id: 1, emoji: '🌸', tag: 'Ventre plat · Anti-ballonnements',
+    name: 'Infusion Légèreté',
+    desc: 'Votre allié bien-être pour un ventre léger et détendu. Ce mélange délicat de plantes soigneusement choisies agit en douceur pour dégonfler le ventre, éliminer les ballonnements et apporter un confort digestif durable.',
+    ingredients: ['Fenouil', 'Menthe poivrée', 'Mélisse', 'Anis vert', 'Graines de coriandre', 'Camomille'],
+    benefits: ['Dégonfle le ventre', 'Élimine les ballonnements', 'Apaise l\'inconfort digestif', 'Effet ventre plat'],
+    price: 12.90, badge: 'Bestseller',
+    bg: 'linear-gradient(135deg, #EBF5E8 0%, #D8EDD4 100%)'
+  },
+  {
+    id: 2, emoji: '🫚', tag: 'Détox · Énergie · Digestion',
+    name: 'Infusion Détox Indien & Gingembre',
+    desc: 'Un mélange puissant inspiré des traditions ayurvédiques indiennes. Conçu pour soutenir la digestion, stimuler le métabolisme et booster l\'énergie naturellement. Aide à réduire les gaz et à affiner la silhouette.',
+    ingredients: ['Gingembre', 'Curcuma', 'Cumin', 'Cardamome', 'Fenugrec', 'Poivre noir', 'Coriandre'],
+    benefits: ['Stimule le métabolisme', 'Soutient la digestion', 'Réduit les gaz', 'Fait rentrer le ventre'],
+    price: 13.90, badge: 'Nouveau',
+    bg: 'linear-gradient(135deg, #FDF3E5 0%, #F5E0C0 100%)'
+  }
+];
+
+/* ── CART STATE ── */
+let cart = [];
+let discount = 0;
+let couponApplied = false;
+let selectedPayment = 'card';
+
+/* ── RENDER PRODUCTS ── */
+const grid = document.getElementById('productGrid');
+PRODUCTS.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'product-card';
+  card.innerHTML = `
+    <div class="product-img" style="background:${p.bg}">
+      ${p.emoji}
+      ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
+    </div>
+    <div class="product-body">
+      <div class="product-tag">${p.tag}</div>
+      <h3 class="product-name">${p.name}</h3>
+      <p class="product-desc">${p.desc}</p>
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-deep);font-weight:500;margin-bottom:10px;">Bienfaits</div>
+        <ul style="list-style:none;padding:0;">
+          ${p.benefits.map(b => `<li style="font-size:13px;color:var(--black);padding:5px 0;border-bottom:1px solid var(--beige-dark);display:flex;align-items:center;gap:8px;"><span style="color:var(--green-deep);font-size:10px;">✦</span>${b}</li>`).join('')}
+        </ul>
+      </div>
+      <div class="product-ingredients">
+        ${p.ingredients.map(i => `<span class="ingredient-chip">${i}</span>`).join('')}
+      </div>
+      <div class="product-footer">
+        <div class="product-price">${p.price.toFixed(2).replace('.',',')} €<span> / 50g</span></div>
+        <button class="add-to-cart" onclick="addToCart(${p.id})">+ Ajouter</button>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+/* ── CART LOGIC ── */
+function addToCart(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  const existing = cart.find(x => x.id === id);
+  if (existing) existing.qty++;
+  else cart.push({ ...p, qty: 1 });
+  updateCartUI();
+  openCart();
+}
+
+function updateCartUI() {
+  const count = cart.reduce((a, b) => a + b.qty, 0);
+  const el = document.getElementById('cartCount');
+  el.textContent = count;
+  el.style.display = count > 0 ? 'flex' : 'none';
+
+  const container = document.getElementById('cartItemsContainer');
+  if (cart.length === 0) {
+    container.innerHTML = '<p class="cart-empty">Votre panier est vide 🌿</p>';
+  } else {
+    container.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <span class="cart-item-icon">${item.emoji}</span>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-price">${item.price.toFixed(2).replace('.',',')} € / unité</div>
+        </div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+          <span>${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+        </div>
+        <button class="remove-item-btn" onclick="removeItem(${item.id})">🗑</button>
+      </div>
+    `).join('');
+  }
+
+  const subtotal = cart.reduce((a, b) => a + b.price * b.qty, 0);
+  discount = couponApplied ? subtotal * 0.10 : 0;
+  const shipping = cart.length > 0 ? 3.40 : 0;
+  const total = subtotal - discount + shipping;
+  document.getElementById('cartSubtotal').textContent = subtotal.toFixed(2).replace('.',',') + ' €';
+  document.getElementById('shippingLine').textContent = cart.length > 0 ? '3,40 €' : '0,00 €';
+  document.getElementById('cartTotal').textContent = total.toFixed(2).replace('.',',') + ' €';
+
+  const dRow = document.getElementById('discountRow');
+  if (couponApplied && discount > 0) {
+    dRow.style.display = 'flex';
+    document.getElementById('discountAmt').textContent = '−' + discount.toFixed(2).replace('.',',') + ' €';
+  } else {
+    dRow.style.display = 'none';
+  }
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(x => x.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(x => x.id !== id);
+  updateCartUI();
+}
+
+function removeItem(id) {
+  cart = cart.filter(x => x.id !== id);
+  updateCartUI();
+}
+
+function applyCoupon() {
+  const code = document.getElementById('couponInput').value.trim().toUpperCase();
+  const msg = document.getElementById('couponMsg');
+  if (code === 'BIENVENUE') {
+    couponApplied = true;
+    msg.style.display = 'block';
+    msg.style.color = 'var(--green-deep)';
+    msg.textContent = '✓ Code BIENVENUE appliqué — 10% de réduction !';
+    updateCartUI();
+  } else {
+    msg.style.display = 'block';
+    msg.style.color = '#e55';
+    msg.textContent = '✕ Code invalide. Essayez BIENVENUE pour votre 1ère commande.';
+  }
+}
+
+function openCart() {
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCart() {
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+/* ── CHECKOUT ── */
+function openCheckout() {
+  if (cart.length === 0) return;
+  closeCart();
+
+  const subtotal = cart.reduce((a, b) => a + b.price * b.qty, 0);
+  const disc = couponApplied ? subtotal * 0.10 : 0;
+  const shipping = 3.40;
+  const total = subtotal - disc + shipping;
+
+  const box = document.getElementById('orderSummaryBox');
+  box.innerHTML = `
+    <p class="order-summary-title">Résumé de la commande</p>
+    ${cart.map(i => `<div class="order-summary-item"><span>${i.emoji} ${i.name} × ${i.qty}</span><span>${(i.price*i.qty).toFixed(2).replace('.',',')} €</span></div>`).join('')}
+    ${disc > 0 ? `<div class="order-summary-item" style="color:var(--green-deep)"><span>Réduction BIENVENUE</span><span>−${disc.toFixed(2).replace('.',',')} €</span></div>` : ''}
+    <div class="order-summary-item"><span>🚚 Frais d'expédition</span><span>3,40 €</span></div>
+    <div class="order-total-line"><span>Total TTC</span><span>${total.toFixed(2).replace('.',',')} €</span></div>
+  `;
+
+  document.getElementById('checkoutModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCheckout() {
+  document.getElementById('checkoutModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function selectPayment(method) {
+  selectedPayment = method;
+  document.getElementById('pm-card').classList.toggle('selected', method === 'card');
+  document.getElementById('pm-paypal').classList.toggle('selected', method === 'paypal');
+  document.getElementById('card-fields').style.display = method === 'card' ? 'block' : 'none';
+  document.getElementById('paypal-fields').style.display = method === 'paypal' ? 'block' : 'none';
+}
+
+function confirmOrder() {
+  const fname = document.getElementById('fname').value.trim();
+  const lname = document.getElementById('lname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const address = document.getElementById('address').value.trim();
+  const city = document.getElementById('city').value.trim();
+
+  if (!fname || !lname || !email || !phone || !address || !city) {
+    alert('Veuillez remplir tous les champs obligatoires.');
+    return;
+  }
+
+  const subtotal = cart.reduce((a, b) => a + b.price * b.qty, 0);
+  const disc = couponApplied ? subtotal * 0.10 : 0;
+  const shipping = 3.40;
+  const total = subtotal - disc + shipping;
+
+  // Build order message (WhatsApp number encoded)
+  const orderLines = cart.map(i => `- ${i.name} × ${i.qty} = ${(i.price*i.qty).toFixed(2)}€`).join('\n');
+  const msg = [
+    `🛍 *Nouvelle commande VELYA*`,
+    ``,
+    `👤 *Client :* ${fname} ${lname}`,
+    `📧 *Email :* ${email}`,
+    `📞 *Téléphone :* ${phone}`,
+    `📍 *Adresse :* ${address}, ${city}`,
+    ``,
+    `*Articles commandés :*`,
+    orderLines,
+    disc > 0 ? `\n💚 *Code promo BIENVENUE* : −${disc.toFixed(2)}€` : '',
+    `🚚 *Frais d'expédition :* 3,40€`,
+    ``,
+    `💰 *Total : ${total.toFixed(2)}€*`,
+    `💳 *Paiement :* ${selectedPayment === 'card' ? 'Carte bancaire' : 'PayPal'}`,
+  ].join('\n');
+
+  // Encoded WhatsApp redirect (number hidden in encoded form)
+  const _n = atob('MjEyNzY2NTQ5Njkw'); // number encoded
+  const waUrl = `https://wa.me/${_n}?text=${encodeURIComponent(msg)}`;
+
+  // Send order to WhatsApp silently
+  const iframe = document.createElement('a');
+  iframe.href = waUrl;
+  iframe.target = '_blank';
+  iframe.rel = 'noopener noreferrer';
+  document.body.appendChild(iframe);
+
+  // Auto-send
+  setTimeout(() => {
+    iframe.click();
+    document.body.removeChild(iframe);
+  }, 300);
+
+  // Show success
+  closeCheckout();
+  document.getElementById('successModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSuccess() {
+  document.getElementById('successModal').classList.remove('open');
+  document.body.style.overflow = '';
+  cart = [];
+  couponApplied = false;
+  discount = 0;
+  document.getElementById('couponInput').value = '';
+  document.getElementById('couponMsg').style.display = 'none';
+  // Reset form
+  ['fname','lname','email','phone','address','city','postcode','cardnum','expiry','cvv'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  updateCartUI();
+}
+
+// Format card number input
+document.getElementById('cardnum')?.addEventListener('input', function() {
+  this.value = this.value.replace(/\D/g,'').replace(/(\d{4})(?=\d)/g,'$1 ').slice(0,19);
+});
+document.getElementById('expiry')?.addEventListener('input', function() {
+  this.value = this.value.replace(/\D/g,'').replace(/(\d{2})(\d)/,'$1 / $2').slice(0,7);
+});
+</script>
+</body>
+</html>
